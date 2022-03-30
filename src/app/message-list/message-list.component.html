@@ -1,0 +1,21 @@
+<div *ngFor="let post of posts">
+    <div class="card" [ngClass]="1 == post.userId ? 'my-message-background' : 'other-user-messaage-background' ">
+      <div class="card-header">
+        <clr-icon shape="user" class="is-solid"></clr-icon>
+        <span class="modify-options">
+          <ng-container *ngIf="1 == post.userId">
+            <clr-icon shape="pencil" class="is-solid" (click)="editPost(post.id)" ></clr-icon>
+            <clr-icon shape="trash" class="is-solid" (click)="deletePost(post.id)"></clr-icon>
+         </ng-container>
+        </span>
+       
+      </div>
+  <div class="card-block">
+    <b>{{post.user.full_name}} : {{post.dateTime}}</b>
+  
+      <div class="card-media-description">
+        <span class="card-media-title">{{post.message}}</span>
+      </div>
+</div>
+</div>
+</div>

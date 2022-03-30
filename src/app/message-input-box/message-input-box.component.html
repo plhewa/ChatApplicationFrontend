@@ -1,0 +1,55 @@
+<div>
+    <div *ngIf="isInputBoxVisible == false">
+      <span class="clr-subtext"> 
+        <button class="btn btn-primary" (click)="setAppearInputBoxToTrue()"><clr-icon shape="note"></clr-icon> New Conversation</button>
+        </span>
+    </div>
+    <ng-container *ngIf="isInputBoxVisible == true">
+      <form class="clr-form clr-form-compact" novalidate #form="ngForm" (submit)="onSubmit()" autocomplete="off">
+        <div class="clr-form-control">
+          <div class="clr-control-container">
+            <input
+              type="hidden"
+              name="id"
+              [value] = "messageData.id"
+          >
+          <input
+              type="hidden"
+              name="dateTime"
+              [value] = "messageData.dateTime"
+          >
+          <input
+              type="hidden"
+              name="userId"
+              [value] = "messageData.userId"
+          >
+            <div class="clr-input-wrapper">
+              <input type="text" id="example9" 
+              class="clr-input"   
+              placeholder="Start a new conversation. Type '@' to mention someone."
+              name="message"
+              #message="ngModel"
+              [(ngModel)]="messageData.message"
+              required
+              maxlength="50" />
+              <div>
+                <clr-icon shape="happy-face"></clr-icon>&nbsp;
+                <clr-icon shape="neutral-face"></clr-icon>&nbsp;
+                <clr-icon shape="sad-face"></clr-icon>&nbsp;
+                <clr-icon shape="thumbs-up"></clr-icon>&nbsp;
+                <clr-icon shape="thumbs-down"></clr-icon>&nbsp;
+              </div>
+              
+            </div>
+            <span class="clr-subtext"><button class="btn btn-info btn-block" type="submit"><clr-icon shape="check"></clr-icon></button></span>
+          </div>
+         
+          
+        </div>
+        
+      </form>
+    </ng-container>
+    
+
+
+  </div>
