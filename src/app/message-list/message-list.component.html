@@ -1,11 +1,11 @@
 <div *ngFor="let post of posts">
-    <div class="card" [ngClass]="1 == post.userId ? 'my-message-background' : 'other-user-messaage-background' ">
+    <div class="card" [ngClass]="myId == post.userId ? 'my-message-background' : 'other-user-messaage-background' ">
       <div class="card-header">
-        <div *ngIf="1 == post.userId; else elseBlock">
+        <div *ngIf="myId == post.userId; else elseBlock">
           <img src="../../assets/My_Profile_Image.jpeg" alt="profile picture" class="profile-pictre-dimensions">
 
           <span class="modify-options">
-            <ng-container *ngIf="1 == post.userId">
+            <ng-container *ngIf="myId == post.userId">
               <clr-icon shape="pencil" class="is-solid" (click)="editPost(post.id)" ></clr-icon>
               <clr-icon shape="trash" class="is-solid" (click)="deletePost(post.id)"></clr-icon>
            </ng-container>

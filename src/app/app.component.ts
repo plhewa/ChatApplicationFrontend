@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageServiceService } from './message-service.service';
 import { Message } from './models/message.model';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import {Notify_Url,Message_Base_Url} from './constants';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit{
   
   ngOnInit(): void {
     // apply signalR to implment relatime environment in the chat application
-    this._hubConnection = new HubConnectionBuilder().withUrl('https://localhost:5001/notify').build();
+    this._hubConnection = new HubConnectionBuilder().withUrl(Notify_Url).build();
     this._hubConnection.start()
     .then(()=>
     console.log('connection start'))
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit{
 
   //get all the messages 
   getMessagaes(){
-    this.messageService.getMessages('https://localhost:5001/api/Message').subscribe(
+    this.messageService.getMessages(Message_Base_Url).subscribe(
       (repsonse) => {
         this.posts = repsonse;
       }
@@ -57,7 +58,7 @@ export class AppComponent implements OnInit{
 
 // insert a new message
  insertMessage(newMessage: Message) {
-    this.messageService.postMessage('https://localhost:5001/api/Message',newMessage).subscribe(data =>{
+    this.messageService.postMessage(Message_Base_Url,newMessage).subscribe(data =>{
       console.log(data);
       this.resetData();
     });
@@ -65,7 +66,7 @@ export class AppComponent implements OnInit{
 
   //update an existing message
   updateMessage(message : Message){
-    this.messageService.updateMessage('https://localhost:5001/api/Message/'+message.id , message).subscribe(data =>{
+    this.messageService.updateMessage(Message_Base_Url+'/'+message.id , message).subscribe(data =>{
       console.log(data);
       this.resetData();
     });
@@ -73,9 +74,8 @@ export class AppComponent implements OnInit{
 
   //delete a message
   deleteMessageById(id : number) {
-    this.messageService.deleteMessage('https://localhost:5001/api/Message/'+id).subscribe(data =>{
+    this.messageService.deleteMessage(Message_Base_Url+'/'+id).subscribe(data =>{
       console.log(data);
-      //this.posts.filter((post) => post.id != id);
       this.resetData();
     });
   }
@@ -89,7 +89,7 @@ fetchMessageById (messageId : number)
 
 //get message by id
  getMessageById(id : number){
-    this.messageService.getMessageById('https://localhost:5001/api/Message/'+id).subscribe(
+    this.messageService.getMessageById(Message_Base_Url+'/'+id).subscribe(
     (repsonse) => {
       this.messageData = repsonse;
     }

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {My_User_Id} from '../constants';
 
 @Component({
   selector: 'app-message-list',
@@ -10,6 +11,8 @@ export class MessageListComponent implements OnInit {
   @Input() posts :any  = []; 
 
   currentStyles : Record<string, string> = {};
+
+  myId : number = My_User_Id;
 
   @Output() editMessage = new EventEmitter<number>();
   @Output() deleteMessage = new EventEmitter<number>();

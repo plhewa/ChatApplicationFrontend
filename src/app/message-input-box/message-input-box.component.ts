@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Message } from '../models/message.model';
+import {My_User_Id} from '../constants';
 
 @Component({
   selector: 'app-message-input-box',
@@ -22,7 +23,7 @@ export class MessageInputBoxComponent implements OnInit {
 
   onSubmit() : void{
 
-    this.messageData.userId = 1;
+    this.messageData.userId = My_User_Id;
     this.messageData.dateTime = new Date();
 
     this.addMessage.emit(this.messageData);
